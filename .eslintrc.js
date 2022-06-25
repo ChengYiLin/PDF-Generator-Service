@@ -14,5 +14,8 @@ module.exports = {
         sourceType: "module",
     },
     plugins: ["react", "@typescript-eslint"],
-    rules: {},
+    rules: {
+        "new-cap": "off",
+        "require-jsdoc": "off",
+    },
 };
