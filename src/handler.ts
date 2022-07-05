@@ -1,25 +1,19 @@
 import express from "express";
 import serverless from "serverless-http";
+import apiRouter from "./routes/routes";
+import httpErrorHandling from "./middleware/httpError.middleware";
 
 const app = express();
 
-app.get("/", (req, res, next) => {
-    return res.status(200).json({
-        message: "Hello AWS Lambda Yo Yo",
-    });
-});
+// For parsing application/json & application/x-www-form-urlencoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/hello", (req, res, next) => {
-    return res.status(200).json({
-        message: "Hello from path!",
-    });
-});
+// Router For API
+app.use(apiRouter);
 
-app.use((req, res, next) => {
-    return res.status(404).json({
-        error: "Not Found",
-    });
-});
+// Error Handling
+app.use(httpErrorHandling);
 
 const handler = serverless(app);
 export { handler };

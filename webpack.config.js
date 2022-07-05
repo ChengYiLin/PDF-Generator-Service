@@ -1,5 +1,5 @@
 const path = require("path");
-const slsw = require('serverless-webpack');
+const slsw = require("serverless-webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
@@ -7,6 +7,9 @@ module.exports = {
     mode: "production",
     entry: slsw.lib.entries,
     target: "node",
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".json"],
+    },
     module: {
         rules: [
             {
@@ -18,11 +21,9 @@ module.exports = {
         ],
     },
     output: {
-        libraryTarget: 'commonjs',
-        path: path.resolve(__dirname, '.webpack'),
-        filename: '[name].js'
+        libraryTarget: "commonjs",
+        path: path.resolve(__dirname, ".webpack"),
+        filename: "[name].js",
     },
-    plugins: [
-        new CleanWebpackPlugin()
-    ]
-}
+    plugins: [new CleanWebpackPlugin()],
+};
