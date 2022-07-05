@@ -1,0 +1,16 @@
+{
+    "include": ["src/**.*"],
+    "compilerOptions": {
+        "outDir": ".webpack",
+        "module": "es6",
+        "target": "es5",
+        "jsx": "react",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noImplicitAny": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    }
+}

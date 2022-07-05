@@ -10,9 +10,19 @@ provider:
 
 functions:
   api:
-    handler: server/handler.handler
+    handler: src/handler.handler
     events:
       - httpApi: '*'
 
 plugins:
+  - serverless-webpack
   - serverless-offline
+
+package:
+  individually: true
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: false
+    packager: 'npm'

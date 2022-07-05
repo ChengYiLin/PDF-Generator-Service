@@ -1,10 +1,11 @@
-const serverless = require("serverless-http");
-const express = require("express");
+import express from "express"
+import serverless from "serverless-http"
+
 const app = express();
 
 app.get("/", (req, res, next) => {
   return res.status(200).json({
-    message: "Hello AWS Lambda!",
+    message: "Hello AWS Lambda Yo Yo",
   });
 });
 
@@ -20,4 +21,5 @@ app.use((req, res, next) => {
   });
 });
 
-module.exports.handler = serverless(app);
+const handler = serverless(app);
+export { handler }
