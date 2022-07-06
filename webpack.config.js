@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
     name: "handler",
-    mode: "production",
+    mode: "development",
     entry: slsw.lib.entries,
     target: "node",
     resolve: {
@@ -26,4 +26,9 @@ module.exports = {
         filename: "[name].js",
     },
     plugins: [new CleanWebpackPlugin()],
+    externals: [
+        {
+            express: "commonjs express",
+        },
+    ],
 };

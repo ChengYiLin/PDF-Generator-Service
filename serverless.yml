@@ -2,27 +2,29 @@ org: chengyilin
 
 app: deploy-test
 service: deploy-test
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
-  name: aws
-  runtime: nodejs16.x
-
-functions:
-  api:
-    handler: src/handler.handler
-    events:
-      - httpApi: '*'
+    name: aws
+    runtime: nodejs16.x
 
 plugins:
-  - serverless-webpack
-  - serverless-offline
+    - serverless-offline
+    - serverless-webpack
 
 package:
-  individually: true
+    individually: true
 
 custom:
-  webpack:
-    webpackConfig: 'webpack.config.js'
-    includeModules: false
-    packager: 'npm'
+    serverless-offline:
+        location: .webpack/service
+    webpack:
+        webpackConfig: "webpack.config.js"
+        includeModules: false
+        packager: "npm"
+
+functions:
+    generate-pdf:
+        handler: src/handler.handler
+        events:
+            - httpApi: "*"

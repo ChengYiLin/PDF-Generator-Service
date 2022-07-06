@@ -5,10 +5,6 @@ import httpErrorHandling from "./middleware/httpError.middleware";
 
 const app = express();
 
-// For parsing application/json & application/x-www-form-urlencoded
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 // Router For API
 app.use(apiRouter);
 
@@ -16,4 +12,6 @@ app.use(apiRouter);
 app.use(httpErrorHandling);
 
 const handler = serverless(app);
-export { handler };
+exports.handler = async (event: Object, context: Object) => {
+    return await handler(event, context);
+};
