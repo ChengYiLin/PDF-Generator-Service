@@ -6,7 +6,10 @@ frameworkVersion: "3"
 
 provider:
     name: aws
-    runtime: nodejs16.x
+    runtime: nodejs14.x
+    apiGateway:
+        binaryMediaTypes:
+            - "application/pdf"
 
 plugins:
     - serverless-offline
@@ -22,6 +25,7 @@ custom:
         webpackConfig: "webpack.config.js"
         includeModules: true
         packager: "npm"
+        packagerOptions: "./package-lock.json"
 
 functions:
     generate-pdf:

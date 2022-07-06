@@ -6,6 +6,7 @@ import { ServerStyleSheet } from "styled-components";
 import ECanConsignmentNote from "../client/pages/ecan/consignmentNote";
 import { ECanConsignmentNoteReqModel } from "../model/ecanConsignmentNote.model";
 import { getSVGBarCode } from "../utils/barcode.utility";
+import generatePDFBuffer from "../utils/pdf.utility";
 import handleRender from "../utils/handleRender.utility";
 
 const router = Router();
@@ -17,7 +18,6 @@ router.post(
     "/ecan/consignmentNote",
     async (req: Request, res: Response, next: NextFunction) => {
         const sheet = new ServerStyleSheet();
-        let pdfHtmlString: string;
 
         try {
             const reqData: ECanConsignmentNoteReqModel[] = JSON.parse(req.body);
@@ -60,13 +60,20 @@ router.post(
 
             const styledComponentsHtmlString = sheet.getStyleTags();
 
-            pdfHtmlString = handleRender(
+            const pdfHtmlString = handleRender(
                 componentHtmlString,
                 styledComponentsHtmlString
             );
 
-            res.setHeader("Content-Type", "text/html");
-            res.send(pdfHtmlString);
+            const pdf = await generatePDFBuffer(pdfHtmlString);
+
+            console.log(pdf);
+
+            res.setHeader("Content-Type", "application/pdf");
+            res.send(pdf.toString("base64"));
+
+            // res.setHeader("Content-Type", "text/html");
+            // res.send(pdfHtmlString);
         } catch (error) {
             console.log(error);
             next(error);
