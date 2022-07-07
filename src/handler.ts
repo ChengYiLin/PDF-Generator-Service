@@ -1,5 +1,5 @@
 import express from "express";
-import serverless from "serverless-http";
+import serverless, { Handler } from "serverless-http";
 import apiRouter from "./routes/routes";
 import httpErrorHandling from "./middleware/httpError.middleware";
 
@@ -11,7 +11,10 @@ app.use(apiRouter);
 // Error Handling
 app.use(httpErrorHandling);
 
-const handler = serverless(app);
+const handle: Handler = serverless(app);
 exports.handler = async (event: Object, context: Object) => {
-    return await handler(event, context);
+    let handler = await handle(event, context);
+    handler = Object.assign(handler, { ...handler, isBase64Encoded: true });
+
+    return handler;
 };
