@@ -1,6 +1,7 @@
 const path = require("path");
 const slsw = require("serverless-webpack");
 const nodeExternals = require("webpack-node-externals");
+const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
@@ -20,6 +21,10 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader",
             },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: "asset/resource",
+            },
         ],
     },
     output: {
@@ -27,5 +32,15 @@ module.exports = {
         path: path.resolve(__dirname, ".webpack"),
         filename: "[name].js",
     },
-    plugins: [new CleanWebpackPlugin()],
+    plugins: [
+        new CleanWebpackPlugin(),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: "./src/fonts",
+                    to: "./src/fonts",
+                },
+            ],
+        }),
+    ],
 };
