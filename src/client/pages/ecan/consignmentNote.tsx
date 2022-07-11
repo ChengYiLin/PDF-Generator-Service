@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { chunk } from "lodash";
+import _ from "lodash";
 import PaperLayout from "../../layout/PDFLayout";
 import { A4Container, GridArea } from "../../styles/common.style";
-import { ECanConsignmentNoteReqModel } from "../../../server/model/ecanConsignmentNote.model";
+import { ECanConsignmentNoteReqModel } from "../../../model/ecanConsignmentNote.model";
 import BarCode from "../../components/BarCode";
 import { PointUnit } from "../../types";
 
@@ -414,7 +414,7 @@ interface Props {
 }
 
 const ECanConsignmentNote: FC<Props> = ({ serverData }) => {
-    const pdfData: ECanConsignmentNoteReqModel[][] = chunk(serverData, 3);
+    const pdfData: ECanConsignmentNoteReqModel[][] = _.chunk(serverData, 3);
 
     return (
         <PaperLayout>
