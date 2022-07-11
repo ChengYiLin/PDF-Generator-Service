@@ -15,11 +15,19 @@ export const ResetCSS = createGlobalStyle`
     figure, figcaption, footer, header, hgroup, 
     menu, nav, output, ruby, section, summary,
     time, mark, audio, video {
+        // Google Fonts
+        @font-face {
+            font-family: 'Noto Serif TC', serif;
+            src: 'NotoSansTC-Medium.otf';
+            font-style: normal;
+            font-weight: normal;
+        }
+
         margin: 0;
         padding: 0;
         border: 0;
         font-size: 100%;
-        font: inherit;
+        font-family: 'Noto Serif TC', sans-serif!important;
         vertical-align: baseline;
         box-sizing: border-box;
     }

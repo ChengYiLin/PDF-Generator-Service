@@ -38,7 +38,7 @@ module.exports = {
             patterns: [
                 {
                     from: "./src/fonts",
-                    to: "./src/fonts",
+                    to: "./fonts",
                 },
             ],
         }),

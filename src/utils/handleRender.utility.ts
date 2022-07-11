@@ -12,7 +12,6 @@ const handleRender = (component: string, styleComponent: string): string => {
             </head>
             <body>
                 <div id="root">${component}</div>
-                <script src="bundle.js"></script>
             </body>
         </html>
     `;

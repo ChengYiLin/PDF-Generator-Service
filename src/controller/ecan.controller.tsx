@@ -22,6 +22,8 @@ router.post(
         try {
             const reqData: ECanConsignmentNoteReqModel[] = JSON.parse(req.body);
 
+            process.env.FONTCONFIG_PATH = "/var/task/fonts";
+
             // Generate BarCode SCG Element
             const preloadServerData: ECanConsignmentNoteReqModel[] =
                 reqData.map((reqData) => ({
@@ -66,8 +68,6 @@ router.post(
             );
 
             const pdf = await generatePDFBuffer(pdfHtmlString);
-
-            console.log(pdf);
 
             res.setHeader("Content-Type", "application/pdf");
             res.send(pdf.toString("base64"));

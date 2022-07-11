@@ -17,6 +17,8 @@ plugins:
 
 package:
     individually: true
+    include:
+        - "./src/fonts"
 
 custom:
     serverless-offline:
