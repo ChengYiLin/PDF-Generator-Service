@@ -1,0 +1,31 @@
+{
+  "name": "pdf-generate-function",
+  "version": "1.0.0",
+  "description": "generate pdf by react-pdf",
+  "main": "app.js",
+  "author": "martin lin",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint '*.ts' --quiet --fix",
+    "compile": "tsc",
+    "test": "npm run compile && npm run unit"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^3.0.0",
+    "esbuild": "^0.14.14",
+    "react": "^16.14.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92",
+    "@types/node": "^17.0.13",
+    "@types/react": "^18.0.23",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
+}
