@@ -1,4 +1,4 @@
-import ReactPDF from '@react-pdf/renderer';
+import ReactPDF, { Font } from '@react-pdf/renderer';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import getRenderedTemplate from './provider';
 
@@ -24,6 +24,15 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
             throw new Error('There is no request body. Please check your request Data!');
         }
 
+        Font.register({
+            family: 'NotoSansTC',
+            src: './fonts/NotoSansTC-Black.otf',
+        });
+
+        await Font.load({ fontFamily: 'NotoSansTC' });
+
+        console.log(Font.getFont({ fontFamily: 'NotoSansTC' })?.data);
+
         const requestTemplate = event.pathParameters['pageTemplate'] || '';
         const requestData = event.body;
         const renderedTemplate = await getRenderedTemplate(requestTemplate, requestData);
@@ -41,7 +50,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         response = {
             statusCode: 500,
             body: JSON.stringify({
-                message: err instanceof Error ? err.message : 'some error happened',
+                message: err instanceof Error ? `Here ${err.message}` : 'some error happened',
             }),
         };
     }

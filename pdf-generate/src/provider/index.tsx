@@ -1,21 +1,17 @@
-import HelloWorld, { IHelloWorldProps } from '../pages/HelloWorld';
-import TCat, { ITCatProps } from '../pages/TCat';
+import Example, { IExampleProps } from '../pages/Example';
+import HCTLogistics, { IHCTLogisticsProps } from '../pages/HCTLogistics';
 
 function getRenderedTemplate(requestedPage: string, requestData: string): Promise<JSX.Element> {
     return new Promise((resolve, reject) => {
         try {
             const serverData = JSON.parse(requestData);
-            console.log(`Server Data : ${serverData}`);
-            console.log(serverData);
 
             switch (requestedPage) {
-                case 'helloWorld':
-                    // TODO: Server Data Properties Check
-                    resolve(<HelloWorld {...(serverData as IHelloWorldProps)} />);
+                case 'example':
+                    resolve(<Example {...(serverData as IExampleProps)} />);
 
-                case 'tcat':
-                    // TODO: Server Data Properties Check
-                    resolve(<TCat {...(serverData as ITCatProps)} />);
+                case 'hctLogistics':
+                    resolve(<HCTLogistics {...(serverData as IHCTLogisticsProps)} />);
 
                 default:
                     throw new Error('There is no matched template. Please check your request Path');
