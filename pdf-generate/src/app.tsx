@@ -1,7 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import getRenderedComponent from './provider';
-import { renderToString } from 'react-dom/server';
-import fontFamilyPath from './fonts/NotoSansTC-Black.otf' assert { type: 'otf' };
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     let response: APIGatewayProxyResult;
@@ -17,15 +15,15 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
 
         const requestTemplate = event.pathParameters['pageTemplate'] || '';
         const requestData = event.body;
-        const renderedComponent = await getRenderedComponent(requestTemplate, requestData);
+        const htmlString = await getRenderedComponent(requestTemplate, requestData);
 
         response = {
             statusCode: 200,
             headers: {
-                'Content-Type': 'application/text',
+                'Content-Type': 'text/html; charset=UTF-8',
             },
             isBase64Encoded: true,
-            body: renderToString(renderedComponent),
+            body: htmlString,
         };
     } catch (err: unknown) {
         response = {
