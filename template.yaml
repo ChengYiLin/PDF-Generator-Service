@@ -28,8 +28,9 @@ Resources:
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:
-        Minify: true
+        Minify: false
         Target: "esnext"
-        Loader: [".otf=copy", ".ttf=copy"]
+        Loader:
+          - .otf=file
         EntryPoints:
           - src/app.tsx

@@ -1,6 +1,7 @@
 import ReactPDF, { Font } from '@react-pdf/renderer';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import getRenderedTemplate from './provider';
+import fontFamilyPath from './fonts/NotoSansTC-Black.otf' assert { type: 'otf' };
 
 /**
  *
@@ -26,7 +27,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
 
         Font.register({
             family: 'NotoSansTC',
-            src: './fonts/NotoSansTC-Black.otf',
+            src: fontFamilyPath,
         });
 
         await Font.load({ fontFamily: 'NotoSansTC' });
